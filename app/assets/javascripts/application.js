@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).ready(function() {
+  $('.update-task').on('click', function() {
+    var taskId = this.parentNode.parentNode.className[0];
+    $.getJSON('/api/tasks' + taskId + '.json', function(task) {
+      console.log(task);
+    });
+  });
+
+  $('.sort-by-title').on('click', function() {
+    $('.sort-by-title').remove();
+    $.getJSON('/api/tasks.json', function(tasks) {
+      console.log(tasks);
+    });
+  });
+});

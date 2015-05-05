@@ -5,4 +5,8 @@ class Api::TasksController < ApplicationController
     @task = Task.find(params[:id])
     respond_with @task
   end
+
+  def index
+    respond_with Task.all
+  end
 end

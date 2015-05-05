@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get "archived_lists", to: "lists#archived_lists"
 
   namespace :api do
-    resources :tasks, only: [:show]
+    resources :tasks, only: [:show, :index]
   end
 end
