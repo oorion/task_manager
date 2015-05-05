@@ -1,0 +1,5 @@
+<%= form_for @list, url: list_path(@list.id), method: :put do |f| %>
+  <%= f.text_field :title %>
+  <%= f.select :archived, options_for_select(%w(archive unarchive)) %>
+  <%= f.submit "Update List" %>
+<% end %>
