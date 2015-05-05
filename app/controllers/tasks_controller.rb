@@ -13,12 +13,7 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    if task.update(update_task_params)
-      redirect_to list_path(params[:list_id])
-    else
-      flash[:error] = "An error occurred in updating the task"
-      redirect_to list_path(params[:list_id])
-    end
+    task.update(update_task_params)
   end
 
   private
