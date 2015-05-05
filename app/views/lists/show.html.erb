@@ -1,5 +1,41 @@
-<%= @list.title %>
-<%= link_to 'Edit List', edit_list_path(@list.id) %>
-<% if @list.archived %>
-  <%= link_to 'Delete List', list_path(@list.id), method: :delete %>
-<% end %>
+<h1><%= @list.title %></h1>
+
+<div class="alter-list">
+  <%= link_to 'Edit List', edit_list_path(@list.id) %>
+  <% if @list.archived %>
+    <%= link_to 'Delete List', list_path(@list.id), method: :delete %>
+  <% end %>
+
+  <%= link_to 'Create New Task', new_list_task_path(list_id: @list.id) %>
+</div>
+
+<h2>Current Tasks</h2>
+<div class="list-tasks">
+  <% @list.incomplete_tasks.each do |task| %>
+    <div class=<%= "#{task.id.to_s}_#{@list.id}" %>>
+      <h3><%= task.title %></h3>
+      <p><%= task.description %></p>
+      Due Date: <%= task.due_date %>
+
+      <%= form_for task, url: list_task_path(list_id: @list.id, id: task.id), method: :put, remote: true do |f| %>
+        <%= f.text_field :title, placeholder: "Title" %><br/>
+        <%= f.text_area :description, placeholder: "Description" %></br>
+        <%= f.label :due_date %>
+        <%= f.date_field :due_date %><br/>
+        <%= f.select :status, options_for_select(%w(complete incomplete)) %>
+        <%= f.submit 'Update Task', class: 'update-task' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.update-task').on('click', function() {
+      var taskId = this.parentNode.parentNode.className[0];
+      $.getJSON('/api/tasks' + taskId + '.json', function(task) {
+        console.log(task);
+      });
+    });
+  });
+</script>

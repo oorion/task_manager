@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
-<%= yield %>
+  <% flash.each do |name, message| %>
+    <div class="<%= name %>">
+      <p><%= message %></p>
+    </div>
+  <% end %>
+
+  <%= yield %>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505151323) do
+ActiveRecord::Schema.define(version: 20150505172531) do
 
   create_table "lists", force: :cascade do |t|
     t.string   "title"
@@ -19,5 +19,17 @@ ActiveRecord::Schema.define(version: 20150505151323) do
     t.datetime "updated_at",                 null: false
     t.boolean  "archived",   default: false
   end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.date     "due_date"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "list_id"
+    t.string   "status",      default: "incomplete"
+  end
+
+  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id"
 
 end
