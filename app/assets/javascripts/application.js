@@ -18,8 +18,8 @@
 
 $(document).ready(function() {
   $('.update-task').on('click', function() {
-    var taskId = this.parentNode.parentNode.className[0];
-    $.getJSON('/api/tasks' + taskId + '.json', function(task) {
+    var taskId = this.parentNode.parentNode.id;
+    $.getJSON('/api/tasks/' + taskId + '.json', function(task) {
       console.log(task);
     });
   });
@@ -28,6 +28,15 @@ $(document).ready(function() {
     $('.sort-by-title').remove();
     $.getJSON('/api/tasks.json', function(tasks) {
       console.log(tasks);
+    });
+  });
+
+  $('.search').on('keyup', function() {
+    var $tasks = $('.task');
+    $tasks.each(function(i, e, a) {
+      if ($(e).children().includes($('.search').val())) {
+        e.hide()
+      }
     });
   });
 });

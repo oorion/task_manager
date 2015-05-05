@@ -12,10 +12,11 @@
 <h2>Current Tasks</h2>
 
 <%= link_to "Sort by Title", class: "sort-by-title" %>
+<input name="search" class="search">
 
 <div class="list-tasks">
   <% @list.incomplete_tasks.each do |task| %>
-    <div class=<%= "#{task.id.to_s}_#{@list.id}" %>>
+    <div class="task" id=<%= task.id.to_s %>>
       <h3><%= task.title %></h3>
       <p><%= task.description %></p>
       Due Date: <%= task.due_date %>
