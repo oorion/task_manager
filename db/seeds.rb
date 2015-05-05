@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+list = List.create(title: 'My First List')
+list.tasks << Task.create(
+                          title: 'first task title',
+                          description: 'first task description',
+                          due_date: '05/10/2015'
+                         )
+list.tasks << Task.create(
+                          title: 'second task title',
+                          description: 'second task description',
+                          due_date: '05/10/2015'
+                         )
