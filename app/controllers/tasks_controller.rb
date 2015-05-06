@@ -18,6 +18,9 @@ class TasksController < ApplicationController
   def update
     task = Task.find(params[:id])
     if task.update(task_params)
+      if task_params[:title].start_with?("/cc")
+        UserMailer.send_email(task_params[:title]).deliver_now
+      end
       redirect_to list_path(task.list.id)
     else
       flash[:error] = "Invalid information"
