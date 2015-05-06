@@ -1,0 +1,14 @@
+<h1><%= @list.title %></h1>
+
+<div class="alter-list">
+  <%= link_to 'Edit List', edit_list_path(@list.id) %>
+  <% if @list.archived %>
+    <%= link_to 'Delete List', list_path(@list.id), method: :delete %>
+  <% end %>
+
+  <%= link_to 'Create New Task', new_list_task_path(list_id: @list.id) %>
+</div>
+
+<button class="sort-by-title">Sort by Title</button>
+<input name="search" class="search" placeholder="Filter">
+<br/>

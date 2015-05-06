@@ -9,4 +9,10 @@ class Api::TasksController < ApplicationController
   def index
     respond_with Task.all
   end
+
+  def update
+    task = Task.find(params[:id])
+    task.update_status
+    respond_with task
+  end
 end

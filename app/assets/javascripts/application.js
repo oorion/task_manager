@@ -17,18 +17,20 @@
 
 
 $(document).ready(function() {
-  $('.update-task').on('click', function() {
-    var taskId = this.parentNode.parentNode.id;
-    $.getJSON('/api/tasks/' + taskId + '.json', function(task) {
-      console.log(task);
-    });
+  $('.complete').on('click', function() {
+    $.post("/api/tasks/" + $(this).parent()[0].id, {}, function(data) {});
+  });
+
+  $('.incomplete').on('click', function() {
+    $.post("/api/tasks/" + $(this).parent()[0].id, {}, function(data) {});
   });
 
   $('.sort-by-title').on('click', function() {
-    $('.sort-by-title').remove();
-    $.getJSON('/api/tasks.json', function(tasks) {
-      console.log(tasks);
+    var $sortedTasks = $('.list-tasks').children().sort(function(x, y) {
+      return $(x).find('.title').html() > $(y).find('.title').html();
     });
+    $('.list-tasks').html("");
+    $('.list-tasks').append($sortedTasks);
   });
 
   $('.search').on('keyup', function() {

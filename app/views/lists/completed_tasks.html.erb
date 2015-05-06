@@ -1,16 +1,17 @@
 <%= render "list_info", list: @list %>
-<%= link_to "Completed Tasks", completed_tasks_path(@list.id) %>
+<%= link_to "Incomplete Tasks", list_path(@list.id) %>
 
-<h2>Incomplete Tasks</h2>
+<h2>Completed Tasks</h2>
 
 <div class="list-tasks">
-  <% @list.incomplete_tasks.each do |task| %>
+  <% @list.complete_tasks.each do |task| %>
     <div class="task" id=<%= task.id.to_s %>>
       Title: <span class="title"><%= task.title %></span><br/>
       Description: <span class="description"><%= task.description %></span><br/>
       Due Date: <span class="due-date"><%= task.due_date %></span><br/>
-      Mark as complete: <input type="checkbox" class="complete" name="complete"/>
+      Mark as incomplete: <input type="checkbox" class="incomplete" name="incomplete"/>
       <%= link_to "Edit Task", edit_list_task_path(list_id: @list.id, id: task.id) %>
     </div>
   <% end %>
 </div>
+

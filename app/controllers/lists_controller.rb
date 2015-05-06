@@ -41,6 +41,10 @@ class ListsController < ApplicationController
     @lists = List.archived
   end
 
+  def completed_tasks
+    @list = List.find(params[:id])
+  end
+
   private
 
   def list_params

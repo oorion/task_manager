@@ -19,7 +19,7 @@ RSpec.describe "Tasks", type: :feature do
       expect(page).to have_content('2015-10-05')
     end
 
-    it "allows a user can update the status of a task without reloading page" do
+    it "allows a user can update the title, description and due date of a task" do
       list = List.create(title: 'Test')
       list.tasks << Task.create(
                                 title: 'task title',
@@ -28,14 +28,36 @@ RSpec.describe "Tasks", type: :feature do
                                )
       visit list_path(list.id)
 
-      select 'complete', from: 'task[status]'
+      click_link_or_button 'Edit Task'
+      fill_in('task[title]', with: 'blah1')
+      fill_in('task[description]', with: 'blah2')
+      fill_in('task[due_date]', with: '05/09/2015')
       click_link_or_button 'Update Task'
 
       expect(current_path).to eq(list_path(list.id))
+      expect(list.tasks.first.title).to eq('blah1')
+      expect(list.tasks.first.description).to eq('blah2')
+      expect(page).to have_content('blah1')
+      expect(page).to have_content('blah2')
+      expect(page).to have_content('2015-09-05')
+    end
+
+    xit "allows a user to click a checkbox to mark task as completed" do
+      #this most likely requires selenium and vcr
+      list = List.create(title: 'Test')
+      list.tasks << Task.create(
+                                title: 'task title',
+                                description: 'task description',
+                                due_date: '05/10/2015'
+                               )
+      visit list_path(list.id)
+
+      within("##{list.tasks.first.id}") do
+        check('complete')
+      end
+
+      sleep(2)
       expect(list.tasks.first.status).to eq('complete')
-      expect(page).to_not have_content('task title')
-      expect(page).to_not have_content('task description')
-      expect(page).to_not have_content('2015-10-05')
     end
   end
 end

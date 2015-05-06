@@ -1,0 +1,8 @@
+<%= form_for @task, url: list_task_path(list_id: @task.list.id, id: @task.id), method: :put do |f| %>
+  <%= f.text_field :title, placeholder: "Title" %><br/>
+  <%= f.text_area :description, placeholder: "Description" %></br>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %><br/>
+  <%= f.select :status, options_for_select(%w(complete incomplete)) %>
+  <%= f.submit 'Update Task' %>
+<% end %>

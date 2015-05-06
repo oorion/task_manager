@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Task Sorting", type: :feature do
   describe "task sorting" do
-    xit "allows a user to sort all incomplete tasks by title" do
+    it "allows a user to sort all incomplete tasks by title" do
       list = List.create(title: 'list title')
       list.tasks << Task.create(
                                 title: 'second task title',
