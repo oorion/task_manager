@@ -41,23 +41,5 @@ RSpec.describe "Tasks", type: :feature do
       expect(page).to have_content('blah2')
       expect(page).to have_content('2015-09-05')
     end
-
-    xit "allows a user to click a checkbox to mark task as completed" do
-      #this most likely requires selenium and vcr
-      list = List.create(title: 'Test')
-      list.tasks << Task.create(
-                                title: 'task title',
-                                description: 'task description',
-                                due_date: '05/10/2015'
-                               )
-      visit list_path(list.id)
-
-      within("##{list.tasks.first.id}") do
-        check('complete')
-      end
-
-      sleep(2)
-      expect(list.tasks.first.status).to eq('complete')
-    end
   end
 end
