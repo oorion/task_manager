@@ -42,8 +42,10 @@ $(document).ready(function() {
   });
 
   function fuzzyMatch(element, searchTerm) {
+    console.log(element);
     var output = false;
     $(element).children().each(function (i, e, a) {
+      console.log(e);
       if ($(e).html().match(searchTerm)) {
         output = true;
       }
@@ -54,7 +56,7 @@ $(document).ready(function() {
   $('.search').on('keyup', function() {
     var searchTerm = new RegExp($(".search").val(), "i");
     console.log(searchTerm);
-    $('.list-tasks').each(function(index, element) {
+    $('.list-tasks').children().each(function(index, element) {
       console.log(fuzzyMatch(element, searchTerm));
       if (fuzzyMatch(element, searchTerm)) {
         $(element).show();
