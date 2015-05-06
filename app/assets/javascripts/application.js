@@ -33,11 +33,33 @@ $(document).ready(function() {
     $('.list-tasks').append($sortedTasks);
   });
 
+  $('.sort-by-due-date').on('click', function() {
+    var $sortedTasks = $('.list-tasks').children().sort(function(x, y) {
+      return $(x).find('.due-date').html() < $(y).find('.title').html();
+    });
+    $('.list-tasks').html("");
+    $('.list-tasks').append($sortedTasks);
+  });
+
+  function fuzzyMatch(element, searchTerm) {
+    var output = false;
+    $(element).children().each(function (i, e, a) {
+      if ($(e).html().match(searchTerm)) {
+        output = true;
+      }
+    });
+    return output;
+  }
+
   $('.search').on('keyup', function() {
-    var $tasks = $('.task');
-    $tasks.each(function(i, e, a) {
-      if ($(e).children().includes($('.search').val())) {
-        e.hide()
+    var searchTerm = new RegExp($(".search").val(), "i");
+    console.log(searchTerm);
+    $('.list-tasks').each(function(index, element) {
+      console.log(fuzzyMatch(element, searchTerm));
+      if (fuzzyMatch(element, searchTerm)) {
+        $(element).show();
+      } else {
+        $(element).hide();
       }
     });
   });
