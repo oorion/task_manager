@@ -35,17 +35,15 @@ $(document).ready(function() {
 
   $('.sort-by-due-date').on('click', function() {
     var $sortedTasks = $('.list-tasks').children().sort(function(x, y) {
-      return $(x).find('.due-date').html() < $(y).find('.title').html();
+      return $(x).find('.due-date').html() < $(y).find('.due-date').html();
     });
     $('.list-tasks').html("");
     $('.list-tasks').append($sortedTasks);
   });
 
   function fuzzyMatch(element, searchTerm) {
-    console.log(element);
     var output = false;
     $(element).children().each(function (i, e, a) {
-      console.log(e);
       if ($(e).html().match(searchTerm)) {
         output = true;
       }
@@ -55,9 +53,7 @@ $(document).ready(function() {
 
   $('.search').on('keyup', function() {
     var searchTerm = new RegExp($(".search").val(), "i");
-    console.log(searchTerm);
     $('.list-tasks').children().each(function(index, element) {
-      console.log(fuzzyMatch(element, searchTerm));
       if (fuzzyMatch(element, searchTerm)) {
         $(element).show();
       } else {
