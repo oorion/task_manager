@@ -29,16 +29,14 @@ $(document).ready(function() {
     var $sortedTasks = $('.list-tasks').children().sort(function(x, y) {
       return $(x).find('.title').html() > $(y).find('.title').html();
     });
-    $('.list-tasks').html("");
-    $('.list-tasks').append($sortedTasks);
+    $('.list-tasks').html($sortedTasks);
   });
 
   $('.sort-by-due-date').on('click', function() {
     var $sortedTasks = $('.list-tasks').children().sort(function(x, y) {
       return $(x).find('.due-date').html() < $(y).find('.due-date').html();
     });
-    $('.list-tasks').html("");
-    $('.list-tasks').append($sortedTasks);
+    $('.list-tasks').html($sortedTasks);
   });
 
   function fuzzyMatch(element, searchTerm) {

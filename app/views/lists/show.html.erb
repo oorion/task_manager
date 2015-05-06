@@ -11,6 +11,6 @@
       Due Date: <span class="due-date"><%= task.due_date %></span><br/>
       Mark as complete: <input type="checkbox" class="complete" name="complete"/>
       <%= link_to "Edit Task", edit_list_task_path(list_id: @list.id, id: task.id) %>
-    </div><br/>
+    </div>
   <% end %>
 </div>
